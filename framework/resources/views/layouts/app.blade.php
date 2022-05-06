@@ -3,9 +3,9 @@
     $user = Cookie::get('tredium_session');
 
     /* Так нельзя делать, но без усилий фастом юзер */
-    /*if (empty($user)) {
+    if (empty($user)) {
         echo '<script>parent.window.location.reload(true);</script>';
-    }*/
+    }
 @endphp
 <!doctype html>
 <html lang="ru">
