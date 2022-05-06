@@ -12,6 +12,12 @@
 ## Как запустить
 
 - git clone ...
+- composer install
+Для скачивания вендора
+- npm install
+Для фронта (у нас его нет)
+- php artisan key:generate
+Для генерации ключа
 - php artisan migrate
 Для миграции БД
 - php artisan db:seed
