@@ -2,8 +2,12 @@
 
 namespace App\Providers;
 
+use App\Http\Controllers\Helper;
 use App\Models\Article;
 use App\Models\ArticleComments;
+use App\Models\ArticleTag;
+use App\Models\ArticleTagToArticle;
+use App\Models\ArticleToLikeUser;
 use App\Models\ArticleToUser;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\ServiceProvider;
@@ -28,9 +32,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Cache::forever('articles', Article::all());
-        Cache::forever('article_to_see', ArticleToUser::all());
-        Cache::forever('article_comments', ArticleComments::all());
+        Helper::loadArticle();
+        Helper::loadArticleComments();
+        Helper::loadArticleTag();
+        Helper::loadArticleTagToArticle();
+        Helper::loadArticleToLikeUser();
+        Helper::loadArticleToUser();
         Paginator::useBootstrap();
     }
 }

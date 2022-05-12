@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Http\Controllers\Helper;
 use App\Models\ArticleComments;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
@@ -25,14 +26,14 @@ class ArticleComment implements ShouldQueue
     private function record()
     {
         /* СИМУЛЯЦИЯ ДОЛГОЙ ЗАПИСИ */
-        /* sleep(600); */
+        sleep(600);
         ArticleComments::create([
             'id_article' => $this->reqData->id_article,
             'user_tredium_session' => $this->reqData->user_tredium_session,
             'title' => $this->reqData->title,
             'body' => $this->reqData->body
         ]);
-        Cache::forever('article_comments', ArticleComments::all());
+        Helper::loadArticleComments();
     }
 
     public function handle()

@@ -2,7 +2,6 @@
 
 namespace App\Jobs;
 
-use App\Http\Controllers\Helper;
 use App\Models\ArticleToUser;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
@@ -12,7 +11,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Cache;
 
-class ArticleSee implements ShouldQueue
+class ArticleToLike implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -25,7 +24,7 @@ class ArticleSee implements ShouldQueue
 
     private function searchAndRecord()
     {
-        $articleToUser = ArticleToUser::where('id_article', $this->reqData->id_article)
+        /*$articleToUser = ArticleToUser::where('id_article', $this->reqData->id_article)
             ->where('user_tredium_session', $this->reqData->user_tredium_session)
             ->get();
         if (count($articleToUser) === 0) {
@@ -34,7 +33,7 @@ class ArticleSee implements ShouldQueue
                 'user_tredium_session' => $this->reqData->user_tredium_session
             ]);
         }
-        Helper::loadArticleToUser();
+        Cache::forever('article_comments', ArticleToUser::all());*/
     }
 
     public function handle()
