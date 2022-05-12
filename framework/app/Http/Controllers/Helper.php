@@ -71,6 +71,7 @@ class Helper extends Controller
         return Cookie::get('tredium_session');
     }
 
+    /* For Paginate Collection */
     public function paginate($items, $perPage = 15, $baseUrl = null,
                              $page = null,
                              $options = [])
