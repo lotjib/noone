@@ -9,6 +9,7 @@ use App\Models\ArticleTagToArticle;
 use App\Models\ArticleToLikeUser;
 use App\Models\ArticleToUser;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Cookie;
 
 class PageController extends Controller
@@ -66,8 +67,12 @@ class PageController extends Controller
     }
 
     public function index() {
-        $articles = Article::orderBy('created_at', 'asc')->take(6)->get();
-        $articles = $this->generateArticlesData($articles);
+        $articles = [];
+        $articles_cache = Cache::get('articles');
+        if ($articles_cache) {
+            $articles = collect($articles_cache->take(6)->all());
+            $articles = $this->generateArticlesData($articles);
+        }
         $data = [
             'ceo_title' => 'ceo_title - index',
             'ceo_description' => 'ceo_description - index',
